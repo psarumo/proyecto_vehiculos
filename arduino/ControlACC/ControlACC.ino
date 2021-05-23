@@ -3,6 +3,10 @@
 //Aqui irian los pines de los motores
 const int SensorPin=2;
 
+const int enable = 8;   // Enable motores (uno para todos)
+const int motorI = 9;   // PWM motores izquierda
+const int motorD = 10;  // PWM motores derecha
+
 //Constantes de control y del sistema
 const float T=0; //Tiempo de muestreo en milisegundos
 const float r=0; //Radio de la rueda
@@ -32,7 +36,17 @@ void setup() {
   
   Serial.begin (9600);
   attachInterrupt(digitalPinToInterrupt(SensorPin),counter,RISING);
- 
+
+  // Motores
+  pinMode (enable, OUTPUT);
+  pinMode (motorI, OUTPUT);
+  pinMode (motorD, OUTPUT);
+
+  digitalWrite (enable, LOW);
+  analogWrite (motorI, 0);
+  analogWrite (motorD, 0);
+
+  delay (1000);
 }
 
 void counter(){
@@ -40,6 +54,9 @@ void counter(){
 }
 
 void loop() {
+  // Habilitar motores
+  digitalWrite (enable, HIGH);
+  
   //Lectura Bluetooth. Paso de la referencia desde el ordenador hasta el vehiculo
   if (Serial.available() > 0) {
       String buff = "";
@@ -67,6 +84,11 @@ void loop() {
 
     //Habria que ver como se implementa el PWM
     U1=U/4.0; //U1 es tracción. Hay que pasar a señal PWM.
+
+    // Enviar PWM
+    pwm = 0; // TODO: esto hay que implementarlo arriba y borrar el 0 este
+    analogWrite (motorI, pwm);
+    analogWrite (motorD, pwm);
 
     t_0=t_1; //Actualizamos el valor
   }
