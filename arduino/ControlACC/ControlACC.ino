@@ -18,6 +18,8 @@ const float ref_d = 0;
 const float ref_v=0;
 const float Kp=0;
 const float Ki=0;
+const float Aimax=0;
+const float Aimin=0;
 //Variables de estados y señal de control
 float Dx3=0;
 float x1=0;
@@ -31,6 +33,7 @@ int vel_cp=0;
 float error=0;
 float int_error=0;
 int pwm=0;
+float Ai=0;
 //Variables auxiliares
 unsigned long t_0=0;
 unsigned long t_1=0;
@@ -79,14 +82,22 @@ void loop() {
     w = ((float) count/20.0)/((t_1-t_0)/1000.0);
     count = 0;
     if(change==false){
-      x1=0;
+      x1=0; //Se resetean las variables acumulativas del control de distancia
       x3=0;
       x4=0;
       error=ref_v-(w*r);
       int_error+=error*((t_1-t_0)/1000.0);
-      U=Kp*error+Ki*int_error;}
+      Ai=Ki*int_error;
+      //Antiwindup
+      if (Ai>=Aimax){
+        Ai=Aimax;}
+      else if(Ai<=Aimin){
+        Ai=Aimin;} 
+      //Señal de control
+      U=Kp*error+Ai;
+    }
     else{
-      int_error=0;
+      int_error=0;//Se resetea la integral del error de velocidad
       x2=w*r-ref_v; //x2 debe ser 0 al inicio
       x1 += ((t_1-t_0)/1000.0)*(vel_cp-(w*r)); //Calculo de x1 realizando la integral
       Dx3=ref_d-x1; //Cuando se calcule KI en Matlab hay que cambiar el signo
