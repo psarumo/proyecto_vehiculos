@@ -15,7 +15,9 @@ const float K2=0;
 const float K3=0;
 const float K4=0;
 const float ref_d = 0;
-
+const float ref_v=0;
+const float Kp=0;
+const float Ki=0;
 //Variables de estados y señal de control
 float Dx3=0;
 float x1=0;
@@ -26,12 +28,15 @@ float w=0; //Velocidad angular
 float U=0; //Señal de control x4
 float U1=0; //Señal de control
 int vel_cp=0;
-
+float error=0;
+float int_error=0;
+int pwm=0;
 //Variables auxiliares
 unsigned long t_0=0;
 unsigned long t_1=0;
 int count = 0;
-
+bool change= false; //La idea es pasar esto por bluetooh o progamarlo para que cambie al cabo de cierto tiempo
+               //para asegurarse que se ha alcanzado la velocidad de consigna
 void setup() {
   
   Serial.begin (9600);
@@ -73,14 +78,22 @@ void loop() {
     //Lectura de la velocidad y conversion a rev/s
     w = ((float) count/20.0)/((t_1-t_0)/1000.0);
     count = 0;
-
-    x2=w*r;
-    x1 += ((t_1-t_0)/1000.0)*(vel_cp-x2); //Calculo de x1 realizando la integral
-    Dx3=ref_d-x1; //Cuando se calcule KI en Matlab hay que cambiar el signo
-    x3+=Dx3*((t_1-t_0)/1000.0);
-    x4+=x3*((t_1-t_0)/1000.0);
+    if(change==false){
+      x1=0;
+      x3=0;
+      x4=0;
+      error=ref_v-(w*r);
+      int_error+=error*((t_1-t_0)/1000.0);
+      U=Kp*error+Ki*int_error;}
+    else{
+      int_error=0;
+      x2=w*r-ref_v; //x2 debe ser 0 al inicio
+      x1 += ((t_1-t_0)/1000.0)*(vel_cp-(w*r)); //Calculo de x1 realizando la integral
+      Dx3=ref_d-x1; //Cuando se calcule KI en Matlab hay que cambiar el signo
+      x3+=Dx3*((t_1-t_0)/1000.0);
+      x4+=x3*((t_1-t_0)/1000.0);
   
-    U=-K1*x1-K2*x2+K3*x3+K4*x4;
+      U=-K1*x1-K2*x2+K3*x3+K4*x4;}
 
     //Habria que ver como se implementa el PWM
     U1=U/4.0; //U1 es tracción. Hay que pasar a señal PWM.
