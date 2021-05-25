@@ -3,9 +3,18 @@
 //Aqui irian los pines de los motores
 const int SensorPin=2;
 
-const int enable = 8;   // Enable motores (uno para todos)
-const int motorI = 9;   // PWM motores izquierda
-const int motorD = 10;  // PWM motores derecha
+const int enable = 1;   // Enable motores (uno para todos)
+const int motorI1 = 3;  // PWM1 motores izquierda
+const int motorI2 = 10; // PWM2 motores izquierda
+const int motorD3 = 9;  // PWM3 motores derecha
+const int motorD4 = 11; // PWM4 motores derecha
+
+/*     Direcciones motores   */
+/*     / Atras    /  Alante  */
+/* I1 /     0     /    1     */
+/* I2 /     1     /    0     */
+/* D3 /     0     /    1     */
+/* D4 /     1     /    0     */
 
 //Constantes de control y del sistema
 const float T=0; //Tiempo de muestreo en milisegundos
@@ -47,12 +56,16 @@ void setup() {
 
   // Motores
   pinMode (enable, OUTPUT);
-  pinMode (motorI, OUTPUT);
-  pinMode (motorD, OUTPUT);
+  pinMode (motorI1, OUTPUT);
+  pinMode (motorI2, OUTPUT);
+  pinMode (motorD3, OUTPUT);
+  pinMode (motorD4, OUTPUT);
 
   digitalWrite (enable, LOW);
-  analogWrite (motorI, 0);
-  analogWrite (motorD, 0);
+  analogWrite (motorI1, 0);
+  analogWrite (motorI2, 0);
+  analogWrite (motorD3, 0);
+  analogWrite (motorD4, 0);
 
   delay (1000);
 }
@@ -111,8 +124,8 @@ void loop() {
 
     // Enviar PWM
     pwm = 0; // TODO: esto hay que implementarlo arriba y borrar el 0 este
-    analogWrite (motorI, pwm);
-    analogWrite (motorD, pwm);
+    analogWrite (motorI1, pwm);
+    analogWrite (motorD3, pwm);
 
     t_0=t_1; //Actualizamos el valor
   }

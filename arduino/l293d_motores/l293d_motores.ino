@@ -1,23 +1,35 @@
 /* Manejo de motores con L293D*/
 
 // Pines Motores
-int enable = 8; 
-int motorI = 9;
-int motorD = 10;
+int enable = 1; 
+int motorI1 = 3;
+int motorI2 = 10;
+int motorD3 = 9;
+int motorD4 = 11;
 
+
+/*     Direcciones motores   */
+/*     / Atras    /  Alante  */
+/* I1 /     0     /    1     */
+/* I2 /     1     /    0     */
+/* D3 /     0     /    1     */
+/* D4 /     1     /    0     */
 
 void setup() {
   
   Serial.begin (9600);
   
   pinMode (enable, OUTPUT);
-  pinMode (motorI, OUTPUT);
-  pinMode (motorD, OUTPUT);
+  pinMode (motorI1, OUTPUT);
+  pinMode (motorI2, OUTPUT);
+  pinMode (motorD3, OUTPUT);
+  pinMode (motorD4, OUTPUT);
 
   digitalWrite (enable, LOW);
-
-  analogWrite (motorI, 0);
-  analogWrite (motorD, 0);
+  analogWrite (motorI1, 0);
+  analogWrite (motorI2, 0);
+  analogWrite (motorD3, 0);
+  analogWrite (motorD4, 0);
 
   delay (1000);
 }
@@ -34,8 +46,8 @@ void loop() {
   
   for (int i = 0; i <= 255; i++){
 
-  analogWrite (motorI, i);
-  analogWrite (motorD, i);
+  analogWrite (motorI1, i);
+  analogWrite (motorD3, i);
 
   delay (50);
   }
