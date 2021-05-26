@@ -1,6 +1,6 @@
 //Control por realimentación del vector de estados. Control de Vehiculos (MII/MIERA. 2020-2021)
 
-//Aqui irian los pines de los motores
+//Pines
 const int SensorPin=2;
 
 const int enable = 1;   // Enable motores (uno para todos)

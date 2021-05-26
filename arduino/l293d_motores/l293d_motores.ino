@@ -17,7 +17,7 @@ int motorD4 = 11;
 
 void setup() {
   
-  Serial.begin (9600);
+  //Serial.begin (9600);
   
   pinMode (enable, OUTPUT);
   pinMode (motorI1, OUTPUT);
@@ -36,12 +36,12 @@ void setup() {
  
 void loop() {
   // Enabling motors
-  Serial.println ("Enabling Motors");
+  //Serial.println ("Enabling Motors");
   
   digitalWrite (enable, HIGH);
 
   // Motion Forward
-  Serial.println ("Motion Forward");
+  //Serial.println ("Motion Forward");
 
   
   for (int i = 0; i <= 255; i++){
