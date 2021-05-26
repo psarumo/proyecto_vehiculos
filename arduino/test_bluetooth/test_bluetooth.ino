@@ -1,5 +1,5 @@
 #include <SoftwareSerial.h>
-SoftwareSerial BT(2,4); // RX | TX del arduino
+SoftwareSerial BT(7,4); // RX | TX del arduino
 
 String data = "";
 String last_data = "tyfgukyguhñuohh\n\r";
