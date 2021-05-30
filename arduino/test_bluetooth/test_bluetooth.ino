@@ -16,11 +16,12 @@ void setup()
 void loop()
 {
  if(BT.available()){
+  // Leer un dato (esto seria vref). No podemos printear pedir dato porque enconces se guarda en el archivo y no es lo que queremos
   char c = BT.read();
   if(c >= '0' && c <= '9') data += c;
 
   if(c == '\r'){
-    //String aux = "coche:" + data + "\n\r";
+    // Printear en el documento. Habria que poner todos los datos que queremos guardar separados por comas (pwm,v,vref)
     last_data = "coche:" + data + "\n\r";
     data = "";
   }
