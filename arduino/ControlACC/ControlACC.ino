@@ -3,7 +3,7 @@
 //Pines
 const int SensorPin=2;
 
-const int enable = 1;   // Enable motores (uno para todos)
+const int enable = 13;   // Enable motores (uno para todos)
 const int motorI1 = 3;  // PWM1 motores izquierda
 const int motorI2 = 10; // PWM2 motores izquierda
 const int motorD3 = 9;  // PWM3 motores derecha
@@ -64,7 +64,7 @@ void setup() {
   digitalWrite (enable, LOW);
   analogWrite (motorI1, 0);
   analogWrite (motorI2, 0);
-  analogWrite (motorD3, 0);at
+  analogWrite (motorD3, 0);
   analogWrite (motorD4, 0);
 
   delay (1000);

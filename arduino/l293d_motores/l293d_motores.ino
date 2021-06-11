@@ -1,7 +1,7 @@
 /* Manejo de motores con L293D*/
 
 // Pines Motores
-int enable = 1; 
+int enable = 13; 
 int motorI1 = 3;
 int motorI2 = 10;
 int motorD3 = 9;
@@ -44,21 +44,33 @@ void loop() {
   //Serial.println ("Motion Forward");
 
   
-  for (int i = 0; i <= 255; i++){
+//  for (int i = 150; i <= 255; i++){
+//
+//  analogWrite (motorI1, i);
+//  analogWrite (motorD3, i);
+//
+//  delay (50);
+//  }
 
-  analogWrite (motorI1, i);
-  analogWrite (motorD3, i);
-
-  delay (50);
-  }
+  analogWrite (motorI1, 255);
+  analogWrite (motorD3, 255);
   
-  //delay (2000); // 0.2s
+  delay (5000); // 0.2s
+
+//     analogWrite (motorI1, 0);
+//
+//   delay (5000); // 0.2s
+
+   analogWrite (motorI1, 150);
+   analogWrite (motorD3, 150);
+
+   delay (5000); // 0.2s
 
   // Stop
   Serial.println ("Stoping motors");
   
-  digitalWrite (enable, LOW);
-  
-  //delay (3000); //0.3s
+//  digitalWrite (enable, LOW);
+//  
+delay (50); //0.3s
 
 }
