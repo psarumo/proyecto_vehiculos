@@ -25,8 +25,6 @@ const float K1 = -771.8034279089700; //Ganancia del controlador [K,KI]
 const float K2 = 455.7879384367343;
 const float K3 = -322.4745512600699;
 const float K4 = -51.4071480389171;
-const float ref_d = 5;  // Referencia distancia con vehiculo de delante
-const float ref_v = 0; // Velocidad vehiculo de delante
 const float Kp = 0; // PI
 const float Ki = 0; // PI
 const float Aimax=0; // Antiwindup
@@ -47,6 +45,8 @@ float error = 0;
 float int_error = 0;
 int pwm = 0;
 float Ai = 0;
+float ref_d = 5;  // Referencia distancia con vehiculo de delante
+float ref_v = 0; // Velocidad vehiculo de delante
 
 /* Variables auxiliares */
 unsigned long t_0 = 0;
@@ -118,10 +118,10 @@ void loop() {
     /* Obtener velocidad */
     // Lectura de la velocidad y conversion a rev/s
     w_leida = ((float) count / 20.0) / ((t_1 - t_0) / 1000.0);
-    count = 0;
+    //count = 0;
 
     // Filtrar lectura
-    if (w - w_leida > 1 || w_leida - w > 1) {
+    if (w - w_leida > 1 || w_leida - w > 1) { //No se si este filtro puede dar problemas en caso de que la primera lectura no sea cercana a 0
       w = 0.2 * w_leida + 0.8 * w;
     } else w = w_leida;
 
@@ -131,13 +131,30 @@ void loop() {
     count = 0;
 
     /* Control */
-    if (t_1 - t_start < 5000) {
-      pwm = 255;
-    } else if (t_1 - t_start < 7000) {
-      pwm = 200;
-    } else {
-      pwm = 150;
+    if(change==false){
+      x1=0; //Se resetean las variables acumulativas del control de distancia
+      x3=0;
+      x4=0;
+      error=ref_v-(w*r);
+      int_error+=error*((t_1-t_0)/1000.0);
+      Ai=Ki*int_error;
+      //Antiwindup
+      if (Ai>=Aimax){
+        Ai=Aimax;}
+      else if(Ai<=Aimin){
+        Ai=Aimin;} 
+      //Señal de control
+      pwm=Kp*error+Ai;
     }
+    else{
+      int_error=0;//Se resetea la integral del error de velocidad
+      x2=w*r-ref_v; //x2 debe ser 0 al inicio
+      x1 += ((t_1-t_0)/1000.0)*(vel_cp-(w*r)); //Calculo de x1 realizando la integral
+      Dx3=ref_d-x1; //Cuando se calcule KI en Matlab hay que cambiar el signo
+      x3+=Dx3*((t_1-t_0)/1000.0);
+      x4+=x3*((t_1-t_0)/1000.0);
+  
+      pwm=-K1*x1-K2*x2+K3*x3+K4*x4;}
 
     /* Aplicar seniales */
     analogWrite (motorI1, pwm);
