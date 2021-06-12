@@ -148,14 +148,11 @@ void loop() {
     else{*/
      // int_error=0;//Se resetea la integral del error de velocidad
       x2=ref_v-w*r; //x2 debe ser 0 al inicio
-     
-     //Anti wind-up
-     if(pwm<=255){ //He puesto antiwindup superior
       x1 += ((t_1-t_0)/1000.0)*(ref_v-(w*r)); //Calculo de x1 realizando la integral
       Dx3=ref_d-x1;
       x3+=Dx3*((t_1-t_0)/1000.0);
       x4+=x3*((t_1-t_0)/1000.0);
-     }
+     
   
       pwm=(int)(-K1*x1-K2*x2+K3*x3+K4*x4+120.0);
      
