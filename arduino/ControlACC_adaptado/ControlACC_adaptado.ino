@@ -101,7 +101,6 @@ void loop() {
     if (c >= '0' && c <= '9') data += c; // Control de error
 
     if (c == '\r') {
-      
       if (data.length() > 0){
       ref_v = data.toFloat();
       last_data = data;
