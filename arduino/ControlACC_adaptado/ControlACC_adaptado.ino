@@ -63,7 +63,7 @@ String linea = ",,,";
 /* Setup */
 void setup() {
 
-  BT.begin(38400); //IMPORTANTE
+  BT.begin(9600); //IMPORTANTE
 
   BT.setTimeout(10);
 
