@@ -116,7 +116,7 @@ void loop() {
 
     /* Obtener velocidad */
     // Lectura de la velocidad y conversion a rev/s
-    w_leida = ((float) count / 20.0) / ((t_1 - t_0) / 1000.0);
+    w_leida = ((float) count * 2 * 3.1416 / 20.0) / ((t_1 - t_0) / 1000.0);
     //count = 0;
 
     // Filtrar lectura
