@@ -29,6 +29,7 @@ const float Kp = 0; // PI
 const float Ki = 0; // PI
 const float Aimax=0; // Antiwindup
 const float Aimin=0; // Antiwindup
+const float ref_d = 5;  // Referencia distancia con vehiculo de delante
 
 /* Variables de estados y señal de control */
 float Dx3 = 0; // Variable auxiliar
@@ -45,8 +46,7 @@ float error = 0;
 float int_error = 0;
 int pwm = 200;
 float Ai = 0;
-float ref_d = 5;  // Referencia distancia con vehiculo de delante
-float ref_v = 0; // Velocidad vehiculo de delante
+float ref_v = 3; // Velocidad vehiculo de delante
 
 /* Variables auxiliares */
 unsigned long t_0 = 0;
