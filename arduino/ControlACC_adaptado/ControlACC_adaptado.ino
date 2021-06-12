@@ -43,7 +43,7 @@ float U = 0; // Señal de control x4
 float U1 = 0; // Señal de control
 float error = 0;
 float int_error = 0;
-int pwm = 0;
+int pwm = 200;
 float Ai = 0;
 float ref_d = 5;  // Referencia distancia con vehiculo de delante
 float ref_v = 0; // Velocidad vehiculo de delante
@@ -154,6 +154,9 @@ void loop() {
       x4+=x3*((t_1-t_0)/1000.0);
   
       pwm=(int)(-K1*x1-K2*x2+K3*x3+K4*x4+120.0);
+     
+     if(pwm>255) pwm=255;
+     if(pwm<120) pwm=120;
   //}
 
     /* Aplicar seniales */
