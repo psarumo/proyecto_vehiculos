@@ -130,7 +130,7 @@ void loop() {
     count = 0;
 
     /* Control */
-    if(change==false){
+  /*  if(change==false){
       x1=0; //Se resetean las variables acumulativas del control de distancia
       x3=0;
       x4=0;
@@ -145,7 +145,7 @@ void loop() {
       //Señal de control
       pwm=Kp*error+Ai;
     }
-    else{
+    else{*/
       int_error=0;//Se resetea la integral del error de velocidad
       x2=w*r-ref_v; //x2 debe ser 0 al inicio
       x1 += ((t_1-t_0)/1000.0)*(ref_v-(w*r)); //Calculo de x1 realizando la integral
@@ -153,7 +153,8 @@ void loop() {
       x3+=Dx3*((t_1-t_0)/1000.0);
       x4+=x3*((t_1-t_0)/1000.0);
   
-      pwm=-K1*x1-K2*x2+K3*x3+K4*x4;}
+      pwm=-K1*x1-K2*x2+K3*x3+K4*x4;
+  //}
 
     /* Aplicar seniales */
     analogWrite (motorI1, pwm);
