@@ -21,10 +21,10 @@ SoftwareSerial BT(7, 4); // RX | TX del arduino
 /* Constantes */
 const float T = 100; //Tiempo de muestreo en milisegundos
 const float r = 64 * 0.001; //Radio de la rueda (m)
-const float K1 = -771.8034279089700; //Ganancia del controlador [K,KI]
-const float K2 = 455.7879384367343;
-const float K3 = -322.4745512600699;
-const float K4 = -51.4071480389171;
+const float K1 = -156.7241; //Ganancia del controlador [K,KI]
+const float K2 = 118.2170;
+const float K3 = -31.4454;
+const float K4 = -3.0931;
 const float Kp = 0; // PI
 const float Ki = 0; // PI
 const float Aimax=0; // Antiwindup
