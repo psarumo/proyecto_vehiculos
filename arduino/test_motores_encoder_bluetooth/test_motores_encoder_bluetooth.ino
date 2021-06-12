@@ -92,7 +92,7 @@ void loop() {
 
     /* Obtener velocidad */
     // Lectura de la velocidad y conversion a rev/s
-    w_leida = ((float) count * 2 * 3.1416 / 20.0) / ((t_1 - t_0) / 1000.0); // he metido aqui el pi
+    w_leida = ((float) count / 20.0) / ((t_1 - t_0) / 1000.0); // he metido aqui el pi
 
     // Filtrar lectura
     if (w - w_leida > 1 || w_leida - w > 1) {

@@ -61,8 +61,8 @@ void loop() {
 //
 //   delay (5000); // 0.2s
 
-   analogWrite (motorI1, 150);
-   analogWrite (motorD3, 150);
+   analogWrite (motorI1, 100);
+   analogWrite (motorD3, 100);
 
    delay (5000); // 0.2s
 
