@@ -29,7 +29,8 @@ const float Kp = 0; // PI
 const float Ki = 0; // PI
 const float Aimax = 0; // Antiwindup
 const float Aimin = 0; // Antiwindup
-const float ref_d = 5; // Referencia distancia con vehiculo de delante
+const float ref_d = 0; // Referencia incr distancia con vehiculo de delante
+//const float ref_d = 5; // Referencia distancia con vehiculo de delante
 
 /* Variables de estados y señal de control */
 float Dx3 = 0; // Variable auxiliar
@@ -163,7 +164,7 @@ void loop() {
       x3 += Dx3 * ((t_1 - t_0) / 1000.0);
       x4 += x3 * ((t_1 - t_0) / 1000.0);
 
-      pwm = (int)(-K1 * x1 - K2 * x2 + K3 * x3 + K4 * x4 + 120.0);
+      pwm = (int)(-K1 * x1 - K2 * x2 + K3 * x3 + K4 * x4 + 150.0);
 
       if (pwm > 255) pwm = 255;
       if (pwm < 120) pwm = 120;
