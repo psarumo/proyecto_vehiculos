@@ -57,8 +57,7 @@ unsigned long t_1 = 0;
 unsigned long t_start = 0;
 int count = 0;
 bool arranque = false;
-bool change = false; //La idea es pasar esto por bluetooh o progamarlo para que cambie al cabo de cierto tiempo
-//para asegurarse que se ha alcanzado la velocidad de consigna
+bool change = false;
 
 String data = "";
 String last_data = "0";
