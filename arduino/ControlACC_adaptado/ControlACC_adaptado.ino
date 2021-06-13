@@ -31,8 +31,8 @@ const float Aimax = 0; // Antiwindup
 const float Aimin = 0; // Antiwindup
 const float ref_d = 0; // Referencia incr distancia con vehiculo de delante
 //const float ref_d = 5; // Referencia distancia con vehiculo de delante
-const int x3lim=-7;
-const int x4lim=-114;
+const int x3lim=-6;
+const int x4lim=-55;
 
 /* Variables de estados y señal de control */
 float Dx3 = 0; // Variable auxiliar
