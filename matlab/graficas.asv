@@ -12,19 +12,18 @@ u = data(:,1);
 v = data(:,2);
 v_ref = data(:,3);
 
-if size(data,2) == 4
-x = zeros(size(v));
-x_ref = zeros(size(v));
+if size(data,2) == 
+% x = zeros(size(v));
+% x_ref = zeros(size(v));
+% 
+% for i = 2:length(x)
+%     x(i) = x(i-1) + v(i-1)*0.1;
+%     x_ref(i) = x_ref(i-1) + v_ref(i-1)*0.1;
+% end
+% x_ref = x_ref + 5; % Añadir punto de equilibrio
+% d = x_ref-x;
 
-for i = 2:length(x)
-    x(i) = x(i-1) + v(i-1)*0.1;
-    x_ref(i) = x_ref(i-1) + v_ref(i-1)*0.1;
-end
-x_ref = x_ref + 5; % Añadir punto de equilibrio
-d = x_ref-x;
-else
 d = data(:,4) + 5;
-end
 
 figure('color',[1,1,1]);
 subplot(3,1,1);
@@ -59,7 +58,7 @@ hold on
 plot(0:0.1:length(u)/10-0.1,d,'linewidth',2);
 grid on
 xlabel('Tiempo (s)');
-ylim([3,7]);
+ylim([3,8]);
 xlim([0,length(u)/10-0.1]);
 ylabel('Distancia (m)');
 legend('Referencia','Valor real');

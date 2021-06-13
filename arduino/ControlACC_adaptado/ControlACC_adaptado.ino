@@ -106,11 +106,12 @@ void loop() {
     //   t0=t1;
     //   count=0;
     //}
-    if (millis() >= 5000) {
+    if (millis() - t_start >= 5000) {
       arranque = true;
       pwm = 150;
       count=0;
       t_0=t_1;
+      
     }
   } else {
     /* Lectura Bluetooth. Paso de la referencia desde el ordenador hasta el vehiculo */
@@ -192,7 +193,7 @@ void loop() {
       analogWrite(motorD3, pwm);
 
       /* Escribir datos */
-      linea = String(pwm) + "," + String(v, 4) + "," + String(ref_v,4) + "," + String(t_1 - t_start) + "\n\r"; // pwm, v, vref, t
+      linea = String(pwm) + "," + String(v, 4) + "," + String(ref_v,4) + "," + String(x1,4) + "," + String(t_1 - t_start) + "\n\r"; // pwm, v, vref, t
       BT.write(linea.c_str());
 
       t_0 = t_1; //Actualizamos el valor
