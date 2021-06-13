@@ -101,7 +101,7 @@ void loop() {
     /* Aplicar seniales */
     analogWrite(motorI1, pwm);
     analogWrite(motorD3, pwm);
-    t1 = millis();
+    t_1 = millis();
     //if(((t1-t0)>=T) && millis()<5000 ){
     //   t0=t1;
     //   count=0;
@@ -110,19 +110,21 @@ void loop() {
       arranque = true;
       pwm = 150;
       count=0;
-      t_0=t_1:
+      t_0=t_1;
     }
   } else {
     /* Lectura Bluetooth. Paso de la referencia desde el ordenador hasta el vehiculo */
 
     if (BT.available()) {
       // Leer un dato (esto seria vref). No podemos printear pedir d ese guarda en el archivo y no es lo que queremos
+      // La velocidad se envia en cm/s
       char c = BT.read();
       if (c >= '0' && c <= '9') data += c; // Control de error
 
       if (c == '\r') {
         if (data.length() > 0) {
           ref_v = data.toFloat();
+          ref_v = ref_v / 100; // Pasar a m/s
           last_data = data;
         }
         data = "";
@@ -187,7 +189,7 @@ void loop() {
       analogWrite(motorD3, pwm);
 
       /* Escribir datos */
-      linea = String(pwm) + "," + String(v, 4) + "," + last_data + "," + String(t_1 - t_start) + "\n\r"; // pwm, v, vref, t
+      linea = String(pwm) + "," + String(v, 4) + "," + String(ref_v,4) + "," + String(t_1 - t_start) + "\n\r"; // pwm, v, vref, t
       BT.write(linea.c_str());
 
       t_0 = t_1; //Actualizamos el valor
