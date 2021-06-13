@@ -50,7 +50,7 @@ float int_error = 0;
 int pwm = 200;
 float Ai = 0;
 float ref_v = 0.4; // Velocidad vehiculo de delante
-float V0=0;
+float V0=0.4;
 /* Variables auxiliares */
 unsigned long t_0 = 0;
 unsigned long t_1 = 0;
@@ -171,7 +171,7 @@ void loop() {
       if(flag==true){
          v0=w*r;
          flag=false;}         
-      x2 = w * r-v0; //x2 debe ser 0 al inicio
+      x2 = w * r-V0; //x2 debe ser 0 al inicio
       x1 += ((t_1 - t_0) / 1000.0) * (ref_v - (w * r)); //Calculo de x1 realizando la integral
       Dx3 = ref_d - x1;
       x3 += Dx3 * ((t_1 - t_0) / 1000.0);
