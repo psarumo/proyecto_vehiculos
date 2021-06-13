@@ -168,9 +168,9 @@ void loop() {
         }
         else{*/
       // int_error=0;//Se resetea la integral del error de velocidad
-      if(flag==true){
-         v0=w*r;
-         flag=false;}         
+     // if(flag==true){
+      //   v0=w*r;
+     //    flag=false;}         
       x2 = w * r-V0; //x2 debe ser 0 al inicio
       x1 += ((t_1 - t_0) / 1000.0) * (ref_v - (w * r)); //Calculo de x1 realizando la integral
       Dx3 = ref_d - x1;
