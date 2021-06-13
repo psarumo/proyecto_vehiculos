@@ -59,7 +59,7 @@ hold on
 plot(0:0.1:length(u)/10-0.1,d,'linewidth',2);
 grid on
 xlabel('Tiempo (s)');
-ylim([3,7]);
+ylim([4,6]);
 xlim([0,length(u)/10-0.1]);
 ylabel('Distancia (m)');
 legend('Referencia','Valor real');
