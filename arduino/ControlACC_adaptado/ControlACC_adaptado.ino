@@ -177,8 +177,8 @@ void loop() {
 
       pwm = (int)(-K1 * x1 - K2 * x2 + K3 * x3 + K4 * x4 + 150.0);
 
-      //if (pwm > 255) pwm = 255;
-      //if (pwm < 120) pwm = 120;
+      if (pwm > 255) pwm = 255;
+      if (pwm < 120) pwm = 120;
       //}
 
       /* Aplicar seniales */
