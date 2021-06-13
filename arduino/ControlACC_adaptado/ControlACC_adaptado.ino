@@ -103,13 +103,15 @@ void loop() {
     analogWrite(motorI1, pwm);
     analogWrite(motorD3, pwm);
     t1 = millis();
-    if(((t1-t0)>=T) && millis()<5000 ){
-       t0=t1;
-       count=0;
-    }
+    //if(((t1-t0)>=T) && millis()<5000 ){
+    //   t0=t1;
+    //   count=0;
+    //}
     if (millis() >= 5000) {
       arranque = true;
       pwm = 150;
+      count=0;
+      t_0=t_1:
     }
   } else {
     /* Lectura Bluetooth. Paso de la referencia desde el ordenador hasta el vehiculo */
