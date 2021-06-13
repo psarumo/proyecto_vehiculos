@@ -6,7 +6,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Identificacion del sistema
 
-load('../log/putty.log');
+load('../log/prueba1.log');
 
 u = putty(:,1);
 v = putty(:,2);
@@ -19,7 +19,7 @@ for i = 2:length(x)
     x(i) = x(i-1) + v(i-1)*0.1;
     x_ref(i) = x_ref(i-1) + v_ref(i-1)*0.1;
 end
-x_ref = x_ref + 5; % Añadir punto de equilibrio
+x_ref = x_ref + 4.5; % Añadir punto de equilibrio
 
 figure('color',[1,1,1]);
 subplot(3,1,1);
