@@ -103,11 +103,11 @@ void loop() {
     analogWrite(motorI1, pwm);
     analogWrite(motorD3, pwm);
     t1 = millis();
-    if((t1-t0)>=T){
+    if(((t1-t0)>=T) && millis()<5000 ){
        t0=t1;
        count=0;
     }
-    if (millis() > 5000) {
+    if (millis() >= 5000) {
       arranque = true;
       pwm = 150;
     }
