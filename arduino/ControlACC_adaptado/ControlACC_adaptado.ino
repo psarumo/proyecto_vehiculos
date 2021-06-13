@@ -50,7 +50,7 @@ float int_error = 0;
 int pwm = 200;
 float Ai = 0;
 float ref_v = 0.4; // Velocidad vehiculo de delante
-
+float V0=0;
 /* Variables auxiliares */
 unsigned long t_0 = 0;
 unsigned long t_1 = 0;
@@ -58,7 +58,7 @@ unsigned long t_start = 0;
 int count = 0;
 bool arranque = false;
 bool change = false;
-
+bool flag=true;
 String data = "";
 String last_data = "0";
 String linea = ",,,";
@@ -168,7 +168,10 @@ void loop() {
         }
         else{*/
       // int_error=0;//Se resetea la integral del error de velocidad
-      x2 = ref_v - w * r; //x2 debe ser 0 al inicio
+      if(flag==true){
+         v0=w*r;
+         flag=false;}         
+      x2 = w * r-v0; //x2 debe ser 0 al inicio
       x1 += ((t_1 - t_0) / 1000.0) * (ref_v - (w * r)); //Calculo de x1 realizando la integral
       Dx3 = ref_d - x1;
       x3 += Dx3 * ((t_1 - t_0) / 1000.0);
