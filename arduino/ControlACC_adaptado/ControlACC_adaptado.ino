@@ -21,16 +21,18 @@ SoftwareSerial BT(7, 4); // RX | TX del arduino
 /* Constantes */
 const float T = 100; //Tiempo de muestreo en milisegundos
 const float r = 64 * 0.001; //Radio de la rueda (m)
-const float K1 = -156.7241; //Ganancia del controlador [K,KI]
-const float K2 = 118.2170;
-const float K3 = -31.4454;
-const float K4 = -3.0931;
+const float K1 = -197.7510; //Ganancia del controlador [K,KI]
+const float K2 = 145.1253;
+const float K3 = -35.1774;
+const float K4 = -3.0775;
 const float Kp = 0; // PI
 const float Ki = 0; // PI
 const float Aimax = 0; // Antiwindup
 const float Aimin = 0; // Antiwindup
 const float ref_d = 0; // Referencia incr distancia con vehiculo de delante
 //const float ref_d = 5; // Referencia distancia con vehiculo de delante
+const int x3lim=-7;
+const int x4lim=-114;
 
 /* Variables de estados y señal de control */
 float Dx3 = 0; // Variable auxiliar
@@ -162,12 +164,16 @@ void loop() {
       x1 += ((t_1 - t_0) / 1000.0) * (ref_v - (w * r)); //Calculo de x1 realizando la integral
       Dx3 = ref_d - x1;
       x3 += Dx3 * ((t_1 - t_0) / 1000.0);
+       if (x3<x3lim){
+          x3=x3lim;}
       x4 += x3 * ((t_1 - t_0) / 1000.0);
+       if (x4<x4lim){
+          x4=x4lim;}
 
       pwm = (int)(-K1 * x1 - K2 * x2 + K3 * x3 + K4 * x4 + 150.0);
 
-      if (pwm > 255) pwm = 255;
-      if (pwm < 120) pwm = 120;
+      //if (pwm > 255) pwm = 255;
+      //if (pwm < 120) pwm = 120;
       //}
 
       /* Aplicar seniales */
