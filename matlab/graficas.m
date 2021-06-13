@@ -6,11 +6,11 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Identificacion del sistema
 
-load('../log/prueba1.log');
+data=load('../log/quieto.log');
 
-u = putty(:,1);
-v = putty(:,2);
-v_ref = putty(:,3);
+u = data(:,1);
+v = data(:,2);
+v_ref = data(:,3);
 
 x = zeros(size(v));
 x_ref = zeros(size(v));
@@ -19,7 +19,7 @@ for i = 2:length(x)
     x(i) = x(i-1) + v(i-1)*0.1;
     x_ref(i) = x_ref(i-1) + v_ref(i-1)*0.1;
 end
-x_ref = x_ref + 4.5; % Añadir punto de equilibrio
+x_ref = x_ref + 5; % Añadir punto de equilibrio
 
 figure('color',[1,1,1]);
 subplot(3,1,1);
@@ -33,6 +33,7 @@ hold on
 plot(0:0.1:length(u)/10-0.1,v_ref,'linewidth',2);
 xlabel('Tiempo (s)');
 ylabel('Velocidad (m/s)');
+grid on
 set(gca,'fontsize',18);
 % subplot(3,1,3);
 % plot(0:0.1:length(u)/10-0.1,x,'linewidth',2);
@@ -45,4 +46,5 @@ subplot(3,1,3);
 plot(0:0.1:length(u)/10-0.1,x_ref-x,'linewidth',2);
 xlabel('Tiempo (s)');
 ylabel('Distancia (m)');
+grid on
 set(gca,'fontsize',18);
