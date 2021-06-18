@@ -6,7 +6,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Identificacion del sistema
 
-data=load('../log/movimientos.log');
+data=load('../log/suave.log');
 
 u = data(:,1);
 v = data(:,2);
@@ -28,9 +28,9 @@ end
 
 figure('color',[1,1,1]);
 subplot(3,1,1);
-plot(0:0.1:length(u)/10-0.1,u,'linewidth',2);
+plot(0:0.1:length(u)/10-0.1,u),'linewidth',2);
 grid on;
-ylim([118,257]);
+ylim([100,257]);
 xlim([0,length(u)/10-0.1]);
 xlabel('Tiempo (s)');
 ylabel('PWM');
@@ -59,7 +59,7 @@ hold on
 plot(0:0.1:length(u)/10-0.1,d,'linewidth',2);
 grid on
 xlabel('Tiempo (s)');
-ylim([4,6]);
+ylim([4.5,5.5]);
 xlim([0,length(u)/10-0.1]);
 ylabel('Distancia (m)');
 legend('Referencia','Valor real');
