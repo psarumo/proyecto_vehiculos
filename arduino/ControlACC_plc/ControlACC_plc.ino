@@ -143,7 +143,7 @@ void loop() {
       ref_v_ant = ref_v;
 
       /* Obtener velocidad */
-      // Lectura de la velocidad y conversion a rev/s
+      // Lectura de la velocidad y conversion a rad/s
       w_leida = ((float) count * 2 * 3.1416 / 20.0) / ((t_1 - t_0) / 1000.0);
       //count = 0;
 
@@ -156,30 +156,9 @@ void loop() {
       v = w * r;
 
       count = 0;
-
-      /* Control */
-      /*  if(change==false){
-          x1=0; //Se resetean las variables acumulativas del control de distancia
-          x3=0;
-          x4=0;
-          error=ref_v-(w*r);
-          int_error+=error*((t_1-t_0)/1000.0);
-          Ai=Ki*int_error;
-          //Antiwindup
-          if (Ai>=Aimax){
-            Ai=Aimax;}
-          else if(Ai<=Aimin){
-            Ai=Aimin;} 
-          //Señal de control
-          pwm=Kp*error+Ai;
-        }
-        else{*/
-      // int_error=0;//Se resetea la integral del error de velocidad
-     // if(flag==true){
-      //   v0=w*r;
-     //    flag=false;}         
-      x2 = w * r-V0; //x2 debe ser 0 al inicio
-      x1 += ((t_1 - t_0) / 1000.0) * (ref_v - (w * r)); //Calculo de x1 realizando la integral
+        
+      x2 = w * r-V0;
+      x1 += ((t_1 - t_0) / 1000.0) * (ref_v - (w * r));
       Dx3 = ref_d - x1;
       x3 += Dx3 * ((t_1 - t_0) / 1000.0);
        if (x3<x3lim){
@@ -192,7 +171,7 @@ void loop() {
 
       if (pwm > 255) pwm = 255;
       if (pwm < 100) pwm = 100;
-      //}
+      
 
       /* Aplicar seniales */
       analogWrite(motorI1, pwm);
