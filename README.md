@@ -7,8 +7,8 @@ Escuela Técnica Superior de Ingeniería, Universidad de Sevilla
 Año: 2021/2021
 
 Autores:
-Andrés Hernández Rivera
-Jesús Fernández Romero
+Andrés Hernández Rivera, 
+Jesús Fernández Romero, 
 Sara Ruiz Moreno
 
 ## Descripción
