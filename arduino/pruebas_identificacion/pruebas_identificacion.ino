@@ -74,7 +74,6 @@ void loop() {
   /* Lectura Bluetooth. Paso de la referencia desde el ordenador hasta el vehiculo */
 
   if (BT.available()) {
-    // Leer un dato (esto seria vref). No podemos printear pedir d ese guarda en el archivo y no es lo que queremos
     char c = BT.read();
     if (c >= '0' && c <= '9') data += c; // Control de error
 
