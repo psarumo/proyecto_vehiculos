@@ -1,12 +1,3 @@
-#Proyecto de curso: ACC con arduino
-
-Máster: MII/MIERA
-Año: 2021/2021
-Autores:
-Andrés Hernández Rivera
-Jesús Fernández Romero
-Sara Ruiz Moreno
-
 # Proyecto de curso: ACC con arduino
 
 Máster: MII/MIERA
