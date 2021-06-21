@@ -1,6 +1,7 @@
 /*--------------------------------------------------------------------------*/
 /* Control por realimentación del vector de estados.
-   Control de Vehiculos (MII/MIERA. 2020-2021) */
+   Control de Vehiculos (MII/MIERA. 2020-2021)
+   Version para protoboard */
 /*--------------------------------------------------------------------------*/
 #include <SoftwareSerial.h>
 
@@ -66,7 +67,7 @@ String linea = ",,,";
 /* Setup */
 void setup() {
 
-  BT.begin(9600); //IMPORTANTE
+  BT.begin(9600);
 
   BT.setTimeout(10);
 
@@ -117,7 +118,6 @@ void loop() {
     /* Lectura Bluetooth. Paso de la referencia desde el ordenador hasta el vehiculo */
 
     if (BT.available()) {
-      // Leer un dato (esto seria vref). No podemos printear pedir d ese guarda en el archivo y no es lo que queremos
       // La velocidad se envia en cm/s
       char c = BT.read();
       if (c >= '0' && c <= '9') data += c; // Control de error
@@ -142,7 +142,7 @@ void loop() {
       //count = 0;
 
       // Filtrar lectura
-      if (w - w_leida > 1 || w_leida - w > 1) { //No se si este filtro puede dar problemas en caso de que la primera lectura no sea cercana a 0
+      if (w - w_leida > 1 || w_leida - w > 1) {
         w = 0.2 * w_leida + 0.8 * w;
       } else w = w_leida;
 
@@ -150,28 +150,7 @@ void loop() {
       v = w * r;
 
       count = 0;
-
-      /* Control */
-      /*  if(change==false){
-          x1=0; //Se resetean las variables acumulativas del control de distancia
-          x3=0;
-          x4=0;
-          error=ref_v-(w*r);
-          int_error+=error*((t_1-t_0)/1000.0);
-          Ai=Ki*int_error;
-          //Antiwindup
-          if (Ai>=Aimax){
-            Ai=Aimax;}
-          else if(Ai<=Aimin){
-            Ai=Aimin;} 
-          //Señal de control
-          pwm=Kp*error+Ai;
-        }
-        else{*/
-      // int_error=0;//Se resetea la integral del error de velocidad
-     // if(flag==true){
-      //   v0=w*r;
-     //    flag=false;}         
+      
       x2 = w * r-V0; //x2 debe ser 0 al inicio
       x1 += ((t_1 - t_0) / 1000.0) * (ref_v - (w * r)); //Calculo de x1 realizando la integral
       Dx3 = ref_d - x1;

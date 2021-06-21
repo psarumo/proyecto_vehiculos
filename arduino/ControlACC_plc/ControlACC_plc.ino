@@ -1,6 +1,7 @@
 /*--------------------------------------------------------------------------*/
 /* Control por realimentación del vector de estados.
-   Control de Vehiculos (MII/MIERA. 2020-2021) */
+   Control de Vehiculos (MII/MIERA. 2020-2021)
+   Version para PLC */
 /*--------------------------------------------------------------------------*/
 #include <SoftwareSerial.h>
 
@@ -68,7 +69,7 @@ String linea = ",,,";
 /* Setup */
 void setup() {
 
-  BT.begin(9600); //IMPORTANTE
+  BT.begin(9600);
 
   BT.setTimeout(10);
 
@@ -100,14 +101,12 @@ void counter() {
 void loop() {
   if (arranque == false) {
     pwm = 255;
+    
     /* Aplicar seniales */
     analogWrite(motorI1, pwm);
     analogWrite(motorD3, pwm);
     t_1 = millis();
-    //if(((t1-t0)>=T) && millis()<5000 ){
-    //   t0=t1;
-    //   count=0;
-    //}
+
     if (millis() - t_start >= 5000) {
       arranque = true;
       pwm = 150;
@@ -119,7 +118,6 @@ void loop() {
     /* Lectura Bluetooth. Paso de la referencia desde el ordenador hasta el vehiculo */
 
     if (BT.available()) {
-      // Leer un dato (esto seria vref). No podemos printear pedir d ese guarda en el archivo y no es lo que queremos
       // La velocidad se envia en cm/s
       char c = BT.read();
       if (c >= '0' && c <= '9') data += c; // Control de error
@@ -148,7 +146,7 @@ void loop() {
       //count = 0;
 
       // Filtrar lectura
-      if (w - w_leida > 1 || w_leida - w > 1) { //No se si este filtro puede dar problemas en caso de que la primera lectura no sea cercana a 0
+      if (w - w_leida > 1 || w_leida - w > 1) {
         w = 0.2 * w_leida + 0.8 * w;
       } else w = w_leida;
 
