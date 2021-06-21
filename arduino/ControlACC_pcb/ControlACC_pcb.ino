@@ -1,7 +1,7 @@
 /*--------------------------------------------------------------------------*/
 /* Control por realimentación del vector de estados.
    Control de Vehiculos (MII/MIERA. 2020-2021)
-   Version para PLC */
+   Version para PCB */
 /*--------------------------------------------------------------------------*/
 #include <SoftwareSerial.h>
 
